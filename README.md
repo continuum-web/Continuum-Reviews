@@ -42,9 +42,15 @@ This Project is designed for anyone looking to enjoy reading, writing and sharin
 
 ---
 
-As a Reader I want to be able to experience.......
+As a site owner I want to provide an indepentent, censorship free place for Gamers to leave a review of a game.
+As a site owner I want to enable Gamers to be able to create an account to write, edit and delete reviews.
+As a site owneer I want to make it easy for Gamers to find games so that they can leave reveiws on.
 
-As a site owner I want to..........
+As a Gamer of the site I want to be able to leave reviews for games I have played so that others I users can read them.
+As a Gamer of the site I want to be able to create an account, Log in manage my reviews so I can edit or delete them.
+As a Gamer I want to be able to search games to find views so that I can read them.
+As a Gamer of the site I want to be able to sort the reviews but date and popularity so I can find some reviews to read.
+As a Gamer I want to be able to log out of the account so that my account is secure.
 
 
 ---
