@@ -1,36 +1,36 @@
-
 # Continuum Game Reviews
 
 ---
- In the Project I will create a Game Review Site in HTML, JavaScript and CSS and Python.
 
+In the Project I will create a Game Review Site in HTML, JavaScript and CSS and Python.
+
+---
+
+## ShowCase
 
 ---
 
- ## ShowCase
-
----
 ![//]: <> (This is also a comment.)
 
+---
+
+## Navigation
 
 ---
 
- ## Navigation
-
----
-* [UX](#User-Experience)
-* [User-stories](#user-stories)
-* [Structure](#structure)
-* [Features](#Design-and-Features)
-* [Technologies](#technologies)
-* [Testing](#testing)
-* [Deployment](#deployment)
-* [Credits](#credits)
-* [Media](#media)
+-   [UX](#User-Experience)
+-   [User-stories](#user-stories)
+-   [Structure](#structure)
+-   [Features](#Design-and-Features)
+-   [Technologies](#technologies)
+-   [Testing](#testing)
+-   [Deployment](#deployment)
+-   [Credits](#credits)
+-   [Media](#media)
 
 ---
 
-### User Experience 
+### User Experience
 
 ---
 
@@ -44,14 +44,14 @@ This Project is designed for anyone looking to enjoy reading, writing and sharin
 
 As a site owner I want to provide an indepentent, censorship free place for Gamers to leave a review of a game.
 As a site owner I want to enable Gamers to be able to create an account to write, edit and delete reviews.
-As a site owneer I want to make it easy for Gamers to find games so that they can leave reveiws on.
+As a site owner I want to make it easy for Gamers to find games so that they can leave reviews on.
+As a site owner I want to add the ability to add games not in the steam Database so that myself and Gamers can add more games to the site
 
 As a Gamer of the site I want to be able to leave reviews for games I have played so that others I users can read them.
 As a Gamer of the site I want to be able to create an account, Log in manage my reviews so I can edit or delete them.
 As a Gamer I want to be able to search games to find views so that I can read them.
 As a Gamer of the site I want to be able to sort the reviews but date and popularity so I can find some reviews to read.
 As a Gamer I want to be able to log out of the account so that my account is secure.
-
 
 ---
 
@@ -64,9 +64,8 @@ As a Gamer I want to be able to log out of the account so that my account is sec
 ## Design and Features
 
 ---
+
 WireFrames documenting the Design process
-
-
 
 ---
 
@@ -76,20 +75,20 @@ WireFrames documenting the Design process
 
 ### Languages
 
-- [HTML](https://en.wikipedia.org/wiki/HTML)
-- [CSS](https://en.wikipedia.org/wiki/CSS)
-- [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
-- [python](https://python.org)
-  
+-   [HTML](https://en.wikipedia.org/wiki/HTML)
+-   [CSS](https://en.wikipedia.org/wiki/CSS)
+-   [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+-   [python](https://python.org)
+
 ### Frameworks, Libraries and Resource
 
-- Google Dev tools: for testing.
-- Lighthouse: for performance and accessability tests
-- Prettier: to beautify code
-- W3C HTML-validator: Used to find mistakes in my html code.  
-- Jigsaw: Used to find mistakes in my CSS code.
-- Figma: Used to design the wireframe.
-- Visual studio code: used to write the code.
+-   Google Dev tools: for testing.
+-   Lighthouse: for performance and accessability tests
+-   Prettier: to beautify code
+-   W3C HTML-validator: Used to find mistakes in my html code.
+-   Jigsaw: Used to find mistakes in my CSS code.
+-   Figma: Used to design the wireframe.
+-   Visual studio code: used to write the code.
 
 ---
 
@@ -99,27 +98,28 @@ WireFrames documenting the Design process
 
 My plan for testing.......
 
-
-
 ---
 
 ## Deployment
 
 ---
 
-
 ---
 
 ## Credits
+
 ---
+
 I would like to thank my mentor Antonija Simic for help and advice around the project, and for links to information to improve my code.
 
 I would also like to acknoledge the use of google and Stack OverFlow when I needed to remember functions methods.
 
 ---
+
 ## Media
+
 ---
+
 The following are links to any media I have used:
 
 ---
-
