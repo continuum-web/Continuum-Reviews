@@ -1,2 +1,3 @@
-# Ignore figma files
-*.fig
+env.py
+__pycache__/
+.vscode/
