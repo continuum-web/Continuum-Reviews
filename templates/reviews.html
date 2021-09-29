@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block content %}
+<div class="cardContainer">
+	<div class="row">
+		{% for review in reviews %} {% set game_image = review.game_name
+		.strip().replace(" ", "").lower() %}	
+			<div class="col s6">
+				<div class="card ">
+					<div class="card-image">
+						<img src= {{url_for('static', filename = "images/" +
+						game_image + ".png")}}>
+					</div>
+					<p class="card-title">{{review.game_name}}</p>
+					<div class="card-content">
+						<p>{{review.review_description}}</p>
+						<p>Written By: <span>{{review.created_by }}</span></p>
+					</div>
+				</div>
+			</div>{% endfor %}
+		</div>
+</div>
+
+ {% endblock content%}

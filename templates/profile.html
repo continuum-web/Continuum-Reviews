@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="row">
+	<div class="col s12 m8 offset-m2">
+		<div class="card-panel">
+			<h3 class="center-align light-blue-text text-darken-4">
+				{{ username }}'s Profile
+			</h3>
+			<h4 class="right-align">
+				<a href="{{ url_for('add_review') }}"
+					>Add Review<i class="material-icons">add_box</i></a
+				>
+			</h4>
+		</div>
+	</div>
+</div>
+<div class="cardContainer">
+	<div class="row">
+		{% for review in reviews %} {% if review.created_by == username%} {% set
+		game_image = review.game_name .strip().replace(" ", "").lower() %}
+		<div class="col s6">
+			<div class="card">
+				<div class="card-image">
+					<img src= {{url_for('static', filename = "images/" +
+					game_image + ".png")}}>
+				</div>
+				<p class="card-title">{{review.game_name}}</p>
+				<div class="card-content">
+					<p>{{review.review_description}}</p>
+					<p>Written By: <span>{{review.created_by }}</span></p>
+				</div>
+			</div>
+		</div>
+		{% endif %}{% endfor %}
+	</div>
+</div>
+
+{% endblock %}
