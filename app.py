@@ -15,13 +15,12 @@ app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
-reviews = list(mongo.db.reviews.find())
-games = list(mongo.db.games.find())
 
 
 @app.route("/home")
 @app.route("/")
 def home():
+    reviews = list(mongo.db.reviews.find())
 
     return render_template("reviews.html", reviews=reviews)
 
@@ -89,7 +88,7 @@ def add_review():
             "created_by": session["user"]
         }
         mongo.db.reviews.insert_one(reviews)
-        return redirect(url_for("home"))
+        return redirect(url_for("profile", username=session["user"]))
 
     games = mongo.db.games.find().sort("games", 1)
     return render_template("add_reviews.html", games=games)
@@ -97,6 +96,7 @@ def add_review():
 
 @ app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
+    reviews = list(mongo.db.reviews.find())
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -110,16 +110,99 @@ def profile(username):
 @ app.route("/logout")
 def logout():
     # remove user from session cookie
-
+    flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("home"))
 
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    reviews = list(mongo.db.reviews.find({"$text": {"$search": query}}))
+    return render_template("reviews.html", reviews=reviews)
+
+# delete reviews
+
+
+@app.route("/delete_review/<review_id>")
+def delete_review(review_id):
+    mongo.db.reviews.remove({"_id": ObjectId(review_id)})
+    flash("Review Successfully Deleted")
+    return redirect(url_for(
+        "profile", username=session["user"]))
+
+
+@app.route("/edit_review/<review_id>", methods=["GET", "POST"])
+def edit_review(review_id):
+    review = mongo.db.reviews.find_one({"_id": ObjectId(review_id)})
+    games = mongo.db.games.find()
+    game = mongo.db.games.find().sort("game_name", 1)
+    if request.method == "POST":
+        submit = {
+            "game_name": request.form.get("game_name"),
+            "review_description": request.form.get("review_description"),
+            "created_by": session["user"]
+        }
+        mongo.db.reviews.update({"_id": ObjectId(review_id)}, submit)
+        flash("Task Successfully Updated")
+        redirect(url_for('profile', username=session['user']))
+
+    return render_template("editreview.html", review=review, game=game, games=games)
+
+# admin panel
+
+
+@app.route("/games")
+def games():
+    user = session["user"]
+    reviews = list(mongo.db.reviews.find())
+    games = list(mongo.db.games.find().sort("games_name", 1))
+    return render_template("games.html", games=games, user=user, reviews=reviews)
+
+
+@app.route("/add_game", methods=["GET", "POST"])
+def add_game():
+    if request.method == "POST":
+        game = {
+            "name": request.form.get("game_name")
+        }
+        mongo.db.games.insert_one(game)
+        flash("New Game Added")
+        return redirect(url_for("games"))
+    return render_template("games.html")
+
+
+@app.route("/edit_game/<game_id>", methods=["GET", "POST"])
+def edit_game(game_id):
+    if request.method == "POST":
+        submit = {
+            "game": request.form.get("game_name")
+        }
+        mongo.db.games.update({"_id": ObjectId(game_id)}, submit)
+        flash("Game Updated")
+        return redirect(url_for("games"))
+
+    game = mongo.db.games.find_one({"_id": ObjectId(game_id)})
+    return render_template("editgame.html", game=game)
+
+
+@app.route("/delete_game/<game_id>")
+def delete_game(game_id):
+    mongo.db.games.remove({"_id": ObjectId(game_id)})
+    flash("Game Deleted")
+    return redirect(url_for("admin"))
+
+
 # Handle errors
+# @app.errorhandler(Exception)
+# def page_not_found(e):
+
+#     return render_template('404.html', error=e), 404
 
 
 # @app.errorhandler(Exception)
 # def page_not_found(e):
-#     # note that we set the 404 status explicitly
+
 #     return render_template('404.html', error=e), 404
 
 

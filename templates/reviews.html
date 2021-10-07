@@ -1,22 +1,60 @@
 {% extends "base.html" %} {% block content %}
+<div class="row card-panel grey lighten-5">
+	<form action="{{ url_for('search') }}" method="post" class="col s12">
+		<div class="row valign-wrapper center-align">
+			<div class="input-field col s12 m8">
+				<i
+					class="fas fa-search prefix light-blue-text text-darken-4"
+				></i>
+				<input
+					type="text"
+					name="query"
+					id="query"
+					minlength="3"
+					class="validate"
+					required
+				/>
+				<label for="query">Search Reviews</label>
+			</div>
+			<div class="col s12 m4">
+				<a href="{{ url_for('home') }}" class="red btn text-shadow"
+					>Reset</a
+				>
+				<button
+					type="submit"
+					class="light-blue darken-1 btn text-shadow"
+				>
+					<i class="fas fa-search left">Search</i>
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+{% if reviews|length > 0 %} 
 <div class="cardContainer">
 	<div class="row">
-		{% for review in reviews %} {% set game_image = review.game_name
-		.strip().replace(" ", "").lower() %}	
-			<div class="col s6">
-				<div class="card ">
-					<div class="card-image">
-						<img src= {{url_for('static', filename = "images/" +
-						game_image + ".png")}}>
-					</div>
-					<p class="card-title">{{review.game_name}}</p>
-					<div class="card-content">
-						<p>{{review.review_description}}</p>
-						<p>Written By: <span>{{review.created_by }}</span></p>
-					</div>
+		{% for review in reviews %}
+		 {% set game_image = review.game_name.strip().replace(" ", "").lower() %}
+		<div class="col s6">
+			<div class="card">
+				<div class="card-image">
+					<img src= {{url_for('static', filename = "images/" +
+					game_image + ".png")}}>
 				</div>
-			</div>{% endfor %}
+				<p class="card-title">{{review.game_name}}</p>
+				<div class="card-content">
+					<p>{{review.review_description}}</p>
+					<p>Written By: <span>{{review.created_by }}</span></p>
+				</div>
+			</div>
 		</div>
+		{% endfor %}
+	</div>
 </div>
+{% else %}
+<h3 class="red-text text-darken-4 center-align">No Results Found</h3>
 
- {% endblock content%}
+	
+{% endif %}
+
+{% endblock content%}

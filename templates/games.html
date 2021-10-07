@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3 class="light-blue-text text-darken-4 center-align">Admin Page</h3>
+ <!-- Add Game   -->
+ 
+    {% if user == "admin" %}
+    <div class="row card-panel grey lighten-5">
+        <h3 class="light-blue-text text-darken-4 center-align">Add Game</h3>
+        <form class="col s12" method="POST" action="{{ url_for('add_game') }}">
+            <!-- game name -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-folder-open prefix light-blue-text text-darken-4"></i>
+                    <input id="game_name" name="game_name" minlength="3" maxlength="25"
+                        type="text" class="validate" required>
+                    <label for="game_name">Game Name</label>
+                </div>
+            </div>
+            <!-- submit button -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <button type="submit" class="btn-large light-blue darken-1 text-shadow">
+                        Add Game <i class="fas fa-plus-square right"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        {% for game in games %}
+            <div class="col s12 m3">
+                <div class="card light-blue darken-4 text-shadow center-align">
+                    <div class="card-content white-text">
+                        <span class="card-title">{{ game.name}}</span>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{ url_for('edit_game', game_id=game._id) }}" class="btn green accent-4">Edit</a>
+                        <a href="{{ url_for('delete_game', game_id=game._id) }}" class="btn light-blue lighten-1">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+    
+        
+    {% else %}
+        
+    <div class="row">
+       
+            <div class="col s12">
+                <div class="card light-blue darken-4 text-shadow center-align">
+                    <div class="card-content white-text">
+                        <span class="card-title">Hello {{user}}</span>
+                        <h2>Please log in as the admin to add/edit games</h2>
+                    </div>
+                     
+                    </div>
+                </div>
+            </div>
+       
+
+    </div>
+    
+    
+    {% endif %}
+
+    <div class="row card-panel grey lighten-5">
+	<form action="{{ url_for('search') }}" method="post" class="col s12">
+		<div class="row valign-wrapper center-align">
+			<div class="input-field col s12 m8">
+				<i
+					class="fas fa-search prefix light-blue-text text-darken-4"
+				></i>
+				<input
+					type="text"
+					name="query"
+					id="query"
+					minlength="3"
+					class="validate"
+					required
+				/>
+				<label for="query">Search Reviews</label>
+			</div>
+			<div class="col s12 m4">
+				<a href="{{ url_for('home') }}" class="red btn text-shadow"
+					>Reset</a
+				>
+				<button
+					type="submit"
+					class="light-blue darken-1 btn text-shadow"
+				>
+					<i class="fas fa-search left">Search</i>
+				</button>
+			</div>
+		</div>
+	</form>
+</div>
+{% if reviews|length > 0 %} 
+<div class="cardContainer">
+	<div class="row">
+		{% for review in reviews %} {% set game_image = review.game_name
+		.strip().replace(" ", "").lower() %}
+		<div class="col s6">
+			<div class="card">
+				<div class="card-image">
+					<img src= {{url_for('static', filename = "images/" +
+					game_image + ".png")}}>
+				</div>
+				<p class="card-title">{{review.game_name}}</p>
+				<div class="card-content">
+					<p>{{review.review_description}}</p>
+					<p>Written By: <span>{{review.created_by }}</span></p>
+                     <a href="{{ url_for('delete_review', review_id=review._id) }}" class="btn-small green accent-4">Delete</a>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% else %}
+<h3 class="red-text text-darken-4 center-align">No Results Found</h3>
+
+	
+{% endif %}
+
+
+{% endblock %}
