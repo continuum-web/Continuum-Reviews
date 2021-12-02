@@ -107,13 +107,6 @@ My plan for testing.......
 
 ---
 
-## Credits
-
----
-
-I would like to thank my mentor Antonija Simic for help and advice around the project, and for links to information to improve my code.
-
-I would also like to acknoledge the use of google and Stack OverFlow when I needed to remember functions methods.
 
 ---
 
